@@ -20,6 +20,8 @@ let birthdate = document.querySelector("#birthdate");
 let quantity = document.querySelector("#quantity");
 let checkbox = document.querySelector("#checkbox1");
 let text = document.querySelectorAll(".text-control");
+let firstError = document.querySelector(".firstError");
+let allError = document.querySelector(".error");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -39,17 +41,42 @@ function closeModal() {
 
 
 // form fulfillement conditions
-modalBtnSubmit.addEventListener("click", checking);
-modalBtnSubmit.style.color = "white";
-modalBtnSubmit.style.background = "gray";
-
-function checking(e) {
+function validate() {
     if (firstName.value == "" || lastName.value == "" || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
         alert("Saisie invalide")
-        e.preventDefault();
+        firstError.innerText = "Veuillez entrer 2 caractères ou plus"
+        // to prevent form submit
+        return false;
     } else {
-        alert("gogogogo");
-        modalBtnSubmit.style.background = "red";
-        
+        alert("Merci ! Votre réservation a été reçue.");
+        allError.innerText = ""
     }
 }
+
+// modalBtnSubmit.addEventListener("click", checking);
+// modalBtnSubmit.style.color = "white";
+// modalBtnSubmit.style.background = "gray";
+
+// function checking(e) {
+//     if (firstName.value == "" || lastName.value == "" || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
+//         alert("Saisie invalide")
+//         e.preventDefault();
+//     } else {
+//         alert("Merci ! Votre réservation a été reçue.");
+//         modalBtnSubmit.style.background = "red";
+        
+//     }
+// }
+
+// // error details
+// firstName.addEventListener("change", errorMessage);
+
+// function errorMessage() {
+//     if (firstName.value.length < 2) {
+//         error.innerText = "Veuillez entrer 2 caractères ou plus";
+//     } else {
+//         error.innerText = "";
+//     }
+// }
+
+
