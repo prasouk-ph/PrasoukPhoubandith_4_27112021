@@ -17,6 +17,7 @@ let firstName = document.querySelector("#first");
 let firstError = document.querySelector(".firstError");
 let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
+let emailError = document.querySelector(".emailError");
 let birthdate = document.querySelector("#birthdate");
 let quantity = document.querySelector("#quantity");
 let conditionsCheckbox = document.querySelector("#checkbox1");
@@ -50,12 +51,13 @@ function closeModal() {
 
 // form fulfillement conditions
 let firstNameValid = false;
+let emailValid = false;
 firstName.addEventListener("change", textCheck);
+email.addEventListener("change", emailCheck);
 
-function textCheck(e) {
-    var value = e.target.value
+function textCheck(result) {
+    var value = result.target.value;
     var letters = /^[A-Za-z]+$/;
-     
     if (value.length < 2 || value === null || letters.test(value) == false) {
         firstNameValid = false;
     } else {
@@ -64,15 +66,21 @@ function textCheck(e) {
     }
 }
 
-function emailValidation() {
-	let regex = /^\S+@\S+\.\S+$/;
-	return regex.test(email.value);
+function emailCheck(result) {
+    var value = result.target.value;
+	var regex = /^\S+@\S+\.\S+$/;
+    if (regex.test(value) == false) {
+        email = false;
+    } else {
+        emailError.innerText = "";
+        email = true;
+    }
 }
 
 function validate() {
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
     if (firstNameValid == false || conditionsCheckbox.checked == false) {
-        firstError.innerText = "Veuillez entrer 2 caractères ou plus";
+        firstNameError.innerText = "Veuillez entrer 2 caractères ou plus";
         // to prevent form submit
         return false;
     } else {
@@ -81,32 +89,3 @@ function validate() {
         formConfirmation.style.display = "block";
     }
 }
-
-
-// modalBtnSubmit.addEventListener("click", checking);
-// modalBtnSubmit.style.color = "white";
-// modalBtnSubmit.style.background = "gray";
-
-// function checking(e) {
-//     if (firstName.value == "" || lastName.value == "" || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
-//         alert("Saisie invalide")
-//         e.preventDefault();
-//     } else {
-//         alert("Merci ! Votre réservation a été reçue.");
-//         modalBtnSubmit.style.background = "red";
-        
-//     }
-// }
-
-// // error details
-// firstName.addEventListener("change", errorMessage);
-
-// function errorMessage() {
-//     if (firstName.value.length < 2) {
-//         error.innerText = "Veuillez entrer 2 caractères ou plus";
-//     } else {
-//         error.innerText = "";
-//     }
-// }
-
-
