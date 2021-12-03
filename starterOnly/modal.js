@@ -19,9 +19,13 @@ let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
 let birthdate = document.querySelector("#birthdate");
 let quantity = document.querySelector("#quantity");
-let checkbox = document.querySelector("#checkbox1");
+let conditionsCheckbox = document.querySelector("#checkbox1");
 let text = document.querySelectorAll(".text-control");
 let allError = document.querySelector(".error");
+const formBtnConfirmation = document.querySelector(".btn-confirmation");
+const formConfirmation = document.querySelector(".form-confirmation");
+
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -31,40 +35,54 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+
+
+
 // close modal event
 modalCloseBtn.addEventListener("click", closeModal);
+formBtnConfirmation.addEventListener("click", closeModal);
 
 // close modal form
 function closeModal() {
     modalbg.style.display = "none";
+    formConfirmation.style.display = "none";
 }
-
 
 // form fulfillement conditions
 let firstNameValid = false;
-firstName.addEventListener("change", firstChecking);
+firstName.addEventListener("change", textCheck);
 
-function firstChecking(e) {
-    if (e.target.value.length < 2) {
-        firstError.innerText = "Veuillez entrer 2 caractères ou plus";
+function textCheck(e) {
+    var value = e.target.value
+    var letters = /^[A-Za-z]+$/;
+     
+    if (value.length < 2 || value === null || letters.test(value) == false) {
+        firstNameValid = false;
     } else {
         firstError.innerText = "";
         firstNameValid = true;
     }
 }
 
+function emailValidation() {
+	let regex = /^\S+@\S+\.\S+$/;
+	return regex.test(email.value);
+}
 
 function validate() {
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
-    if (firstNameValid == false || checkbox.checked == false) {
-        alert("Veuillez remplir tous les champs")
+    if (firstNameValid == false || conditionsCheckbox.checked == false) {
+        firstError.innerText = "Veuillez entrer 2 caractères ou plus";
         // to prevent form submit
         return false;
     } else {
         alert("Merci ! Votre réservation a été reçue.");
-        allError.innerText = ""
+        // launch form confirmation
+        formConfirmation.style.display = "block";
     }
 }
+
+
 // modalBtnSubmit.addEventListener("click", checking);
 // modalBtnSubmit.style.color = "white";
 // modalBtnSubmit.style.background = "gray";

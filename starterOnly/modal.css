@@ -169,6 +169,17 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+.form-confirmation {
+  display: none;
+  z-index: 2;
+  font-size: 36px;
+  margin: 5% auto;
+  width: 100%;
+  max-width: 500px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+}
+
 .content {
   margin: 5% auto;
   width: 100%;
@@ -539,8 +550,9 @@ footer {
 
 
   .error {
-      color: red;
+      color: crimson;
       text-align: end;
       font-size: small;
-      margin: 6px 0;
+      margin: 6px;
   }
+
