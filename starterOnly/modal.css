@@ -219,7 +219,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.formData[data-error]::after {
+.formData::after {
   content: attr(data-error);
   font-size: 0.4em;
   color: #e54858;
@@ -237,12 +237,12 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
+
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} */
+}
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -550,9 +550,8 @@ footer {
 
 
   .error {
-      color: crimson;
+      color: #e54858;
       text-align: end;
       font-size: small;
       margin: 6px;
   }
-
