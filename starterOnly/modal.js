@@ -24,6 +24,7 @@ let conditionsCheckbox = document.querySelector("#checkbox1");
 let text = document.querySelectorAll(".text-control");
 const formBtnConfirmation = document.querySelector(".btn-confirmation");
 const formConfirmation = document.querySelector(".form-confirmation");
+const formConfirmationClose = document.querySelector(".form-confirmation-close");
 
 
 
@@ -39,6 +40,7 @@ function launchModal() {
 // close modal event
 modalCloseBtn.addEventListener("click", closeModal);
 formBtnConfirmation.addEventListener("click", closeModal);
+formConfirmationClose.addEventListener("click", closeModal);
 
 // close modal form
 function closeModal() {
@@ -117,10 +119,6 @@ function validate(event) {
         modalBody.style.display = "none";
         formConfirmation.style.display = "flex";
         formular.reset();
-        formBtnConfirmation.addEventListener("click", closeformConfirmation);
         } 
 }
 
-function closeformConfirmation() {
-    modalbg.style.display = "none";
-}

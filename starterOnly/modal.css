@@ -172,13 +172,7 @@ main {
 .form-confirmation {
   display: none;
   flex-direction: column;
-  z-index: 2;
   font-size: 36px;
-  margin: 5% auto;
-  width: 100%;
-  max-width: 500px;
-  animation-name: modalopen;
-  animation-duration: var(--modal-duration);
 }
 
 .content {
