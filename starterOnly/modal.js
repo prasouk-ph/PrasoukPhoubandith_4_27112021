@@ -14,15 +14,12 @@ const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.querySelector(".close");
 const modalBtnSubmit = document.querySelector(".btn-submit");
 let firstName = document.querySelector("#first");
-let firstError = document.querySelector(".firstError");
 let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
-let emailError = document.querySelector(".emailError");
 let birthdate = document.querySelector("#birthdate");
 let quantity = document.querySelector("#quantity");
 let conditionsCheckbox = document.querySelector("#checkbox1");
 let text = document.querySelectorAll(".text-control");
-let allError = document.querySelector(".error");
 const formBtnConfirmation = document.querySelector(".btn-confirmation");
 const formConfirmation = document.querySelector(".form-confirmation");
 
@@ -47,9 +44,7 @@ function closeModal() {
 }
 
 // form fulfillement conditions
-let firstNameValid = false;
-let emailValid = false;
-let birthdateValid = false;
+let firstNameValid;
 firstName.addEventListener("input", firstCheck);
 lastName.addEventListener("input", lastCheck);
 email.addEventListener("change", emailCheck);
@@ -58,15 +53,15 @@ birthdate.addEventListener("change", birthdateCheck);
 function firstCheck(result) {
     var value = result.target.value;
     var letters = /^[A-Za-z]+$/;
-    var name = document.getElementById("firstNameInput");
+    var input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
-        name.setAttribute("data-error-visible", "true");
+        input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
-        name.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
+        input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
         firstNameValid = false;
     } else {
-        name.setAttribute("data-error-visible", "false");
-        name.setAttribute("data-error", "");
+        input.setAttribute("data-error-visible", "false");
+        input.setAttribute("data-error", "");
         firstNameValid = true;
     }
 }
@@ -74,15 +69,15 @@ function firstCheck(result) {
 function lastCheck(result) {
     var value = result.target.value;
     var letters = /^[A-Za-z]+$/;
-    var name = document.getElementById("lastNameInput");
+    var input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
-        name.setAttribute("data-error-visible", "true");
+        input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
-        name.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
+        input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
         lastNameValid = false;
     } else {
-        name.setAttribute("data-error-visible", "false");
-        name.setAttribute("data-error", "");
+        input.setAttribute("data-error-visible", "false");
+        input.setAttribute("data-error", "");
         lastNameValid = true;
     }
 }
@@ -111,16 +106,13 @@ function birthdateCheck(result) {
 
 function validate() {
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
-    if (firstNameValid == false || conditionsCheckbox.checked == false) {
-        firstError.innerText = "Veuillez entrer 2 caractères ou plus";
-        emailError.innerText = "Veuillez entrer 2 caractères ou plus";
-
-        // to prevent form submit
-        return false;
-    } 
-    else {
+    if (firstNameValid == true && conditionsCheckbox.checked == true) {
         alert("Merci ! Votre réservation a été reçue.");
         // launch form confirmation
         formConfirmation.style.display = "block";
+        // to prevent form submit
+    } 
+    else {
+        return false;
     }
 }
