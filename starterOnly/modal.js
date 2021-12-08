@@ -13,7 +13,7 @@ const modalbg = document.querySelector(".bground");
 const modalBody = document.querySelector(".content");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const modalCloseBtn = document.querySelector(".close");
+const modalCloseBtn = document.querySelectorAll(".close");
 const modalBtnSubmit = document.querySelector(".btn-submit");
 let firstName = document.querySelector("#first");
 let lastName = document.querySelector("#last");
@@ -24,7 +24,6 @@ let conditionsCheckbox = document.querySelector("#checkbox1");
 let text = document.querySelectorAll(".text-control");
 const formBtnConfirmation = document.querySelector(".btn-confirmation");
 const formConfirmation = document.querySelector(".form-confirmation");
-const formConfirmationClose = document.querySelector(".form-confirmation-close");
 
 
 
@@ -38,9 +37,8 @@ function launchModal() {
 }
 
 // close modal event
-modalCloseBtn.addEventListener("click", closeModal);
+modalCloseBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 formBtnConfirmation.addEventListener("click", closeModal);
-formConfirmationClose.addEventListener("click", closeModal);
 
 // close modal form
 function closeModal() {
