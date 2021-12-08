@@ -50,24 +50,40 @@ function closeModal() {
 let firstNameValid = false;
 let emailValid = false;
 let birthdateValid = false;
-firstName.addEventListener("input", textCheck);
+firstName.addEventListener("input", firstCheck);
+lastName.addEventListener("input", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 
-function textCheck(result) {
+function firstCheck(result) {
     var value = result.target.value;
     var letters = /^[A-Za-z]+$/;
-    var name = document.getElementById("firstName");
+    var name = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
-        // firstError.innerText = "Veuillez entrer 2 caractères ou plus";
         name.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
         name.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
         firstNameValid = false;
     } else {
-        // firstError.innerText = "";
-        name.setAttribute("data-error", "");
         name.setAttribute("data-error-visible", "false");
+        name.setAttribute("data-error", "");
         firstNameValid = true;
+    }
+}
+
+function lastCheck(result) {
+    var value = result.target.value;
+    var letters = /^[A-Za-z]+$/;
+    var name = document.getElementById("lastNameInput");
+    if (value.length < 2 || value === null || letters.test(value) == false) {
+        name.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        name.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
+        lastNameValid = false;
+    } else {
+        name.setAttribute("data-error-visible", "false");
+        name.setAttribute("data-error", "");
+        lastNameValid = true;
     }
 }
 
