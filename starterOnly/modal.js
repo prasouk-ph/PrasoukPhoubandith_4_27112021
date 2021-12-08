@@ -15,16 +15,17 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.querySelectorAll(".close");
 const modalBtnSubmit = document.querySelector(".btn-submit");
+const formBtnConfirmation = document.querySelector(".btn-confirmation");
+const formConfirmation = document.querySelector(".form-confirmation");
 let firstName = document.querySelector("#first");
 let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
 let birthdate = document.querySelector("#birthdate");
-let quantity = document.querySelector("#quantity");
+let participationQuantity = document.querySelector("#quantity");
 let conditionsCheckbox = document.querySelector("#checkbox1");
-let text = document.querySelectorAll(".text-control");
-const formBtnConfirmation = document.querySelector(".btn-confirmation");
-const formConfirmation = document.querySelector(".form-confirmation");
 
+
+let firstNameInput = document.querySelector(".firstNameInput");
 
 
 // launch modal event
@@ -33,6 +34,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+//   to send another form
   modalBody.style.display = "block";
 }
 
@@ -42,21 +44,24 @@ formBtnConfirmation.addEventListener("click", closeModal);
 
 // close modal form
 function closeModal() {
-    modalbg.style.display = "none";
-    formConfirmation.style.display = "none";
+  modalbg.style.display = "none";
+  formConfirmation.style.display = "none";
 }
 
 // form fulfillement conditions
 let firstNameValid;
-firstName.addEventListener("input", firstCheck);
-lastName.addEventListener("input", lastCheck);
+firstName.addEventListener("change", firstCheck);
+lastName.addEventListener("change", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
+participationQuantity.addEventListener("change", quantityCheck);
+// location.addEventListener("change", lastCheck);
+conditionsCheckbox.addEventListener("change", lastCheck);
 
 function firstCheck(result) {
-    var value = result.target.value;
-    var letters = /^[A-Za-z]+$/;
-    var input = document.getElementById("firstNameInput");
+    let value = result.target.value;
+    let letters = /^[A-Za-z]+$/;
+    let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
@@ -70,9 +75,9 @@ function firstCheck(result) {
 }
 
 function lastCheck(result) {
-    var value = result.target.value;
-    var letters = /^[A-Za-z]+$/;
-    var input = document.getElementById("lastNameInput");
+    let value = result.target.value;
+    let letters = /^[A-Za-z]+$/;
+    let input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
@@ -86,37 +91,69 @@ function lastCheck(result) {
 }
 
 function emailCheck(result) {
-    var value = result.target.value;
-	var regex = /^\S+@\S+\.\S+$/;
+    let value = result.target.value;
+	let regex = /^\S+@\S+\.\S+$/;
+    let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
-        emailValid = false;
+        input.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        input.setAttribute("data-error", "Veuillez entrer un mail valide");
+        return false;
     } else {
-        emailError.innerText = "";
-        emailValid = true;
+        input.setAttribute("data-error-visible", "false");
+        input.setAttribute("data-error", "");
+        return true;
     }
 }
 
 function birthdateCheck(result) {
-    var value = result.target.value;
-	var regex = /^\S+@\S+\.\S+$/;
+    let value = result.target.value;
+	let regex = /^\S+@\S+\.\S+$/;
+    let input = document.getElementById("birthdateInput");
     if (regex.test(value) == false) {
-        birthdateValid = false;
+        input.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        input.setAttribute("data-error", "Veuillez entrer une date valide");
+        return false;
     } else {
-        birthdateError.innerText = "";
-        birthdateValid = true;
+        input.setAttribute("data-error-visible", "false");
+        input.setAttribute("data-error", "");
+        return true;
     }
 }
+
+
+function quantityCheck(result) {
+    let value = result.target.value;
+    let regex = /^[0-9]+$/;
+    let input = document.getElementById("quantityInput");
+    if (regex.test(value) == false) {
+        input.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        input.setAttribute("data-error", "Veuillez entrer une nombre");
+        return false;
+    } else {
+        input.setAttribute("data-error-visible", "false");
+        input.setAttribute("data-error", "");
+        return true;
+    }
+}
+
+
+
+
 
 function validate(event) {
     // to prevent form submit
     event.preventDefault();
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
     if (firstNameValid == true && conditionsCheckbox.checked == true) {
-        alert("Merci ! Votre réservation a été reçue.");
         // launch form confirmation
         modalBody.style.display = "none";
         formConfirmation.style.display = "flex";
         formular.reset();
-        } 
+    } else {
+        alert("Saisie invalide")
+    }
 }
 

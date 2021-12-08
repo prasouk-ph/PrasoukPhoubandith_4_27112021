@@ -197,6 +197,12 @@ main {
     justify-content: center;
 }
 
+@media screen and (max-width: 540px) {
+    .content {
+        margin-top: 20%;
+    }
+  } 
+
 .confirmation-message {
     display: flex;
     flex: 1;
@@ -551,12 +557,4 @@ footer {
       
       opacity: 0;
     }
-  }
-
-
-  .error {
-      color: #e54858;
-      text-align: end;
-      font-size: small;
-      margin: 6px;
   }
