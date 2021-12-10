@@ -22,7 +22,7 @@ let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
 let birthdate = document.querySelector("#birthdate");
 let participationQuantity = document.querySelector("#quantity");
-let locationInput = document.querySelector("#locationInput");
+
 let conditionsCheckbox = document.querySelector("#checkbox1");
 
 
@@ -108,8 +108,10 @@ function emailCheck() {
 
 function birthdateCheck() {
     let value = birthdate.value;
+    let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
     let input = document.getElementById("birthdateInput");
-    if (value == "") {
+    // if (value == "") {
+    if (regex.test(value) == false) {
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
         input.setAttribute("data-error", "Veuillez entrer une date valide");
@@ -119,7 +121,6 @@ function birthdateCheck() {
         return true;
     }
 }
-
 
 function quantityCheck() {
     let value = participationQuantity.value;
@@ -138,26 +139,23 @@ function quantityCheck() {
 
 
 locationInput.addEventListener("change", locationChecking);
-const loc = document.querySelectorAll("input[type=radio]");
-
-
+const locationsRadio = document.querySelectorAll("input[type=radio]");
 
 function locationChecking() {
     let input = document.getElementById("locationInput");
-    let radio = document.getElementById("location1");
-	// for (let radio of locationInput) {
-		if (radio.checked == false) {
-            // alert("false")
+	// for (let radio of locationsRadio) {
+    for (let i = 0; i < 7; i++) {
+		// if (radio.checked == false) {
+        if (locationsRadio[i].checked == false) {
             input.setAttribute("data-error-visible", "true");
             // data-error attribute creation with text value, works with formData::after in css
             input.setAttribute("data-error", "Veuillez accepter sélectionner une ville");
-            return false;
+            // return false;
 	    } else {
-            // alert("true")
             input.setAttribute("data-error-visible", "false");
-            return true;
+            // return true;
         }
-    // }
+    }
 }
 
 
@@ -172,7 +170,6 @@ function conditionsChecking() {
     } else {
         input.setAttribute("data-error-visible", "false");
         return true;
-        
     }
 }
 
