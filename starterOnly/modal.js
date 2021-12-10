@@ -56,10 +56,11 @@ email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 participationQuantity.addEventListener("change", quantityCheck);
 // location.addEventListener("change", lastCheck);
-conditionsCheckbox.addEventListener("change", lastCheck);
 
-function firstCheck(result) {
-    let value = result.target.value;
+
+
+function firstCheck() {
+    let value = firstName.value;
     let letters = /^[A-Za-z]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
@@ -69,7 +70,6 @@ function firstCheck(result) {
         firstNameValid = false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        input.setAttribute("data-error", "");
         firstNameValid = true;
     }
 }
@@ -85,7 +85,6 @@ function lastCheck(result) {
         lastNameValid = false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        input.setAttribute("data-error", "");
         lastNameValid = true;
     }
 }
@@ -101,26 +100,25 @@ function emailCheck(result) {
         return false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        input.setAttribute("data-error", "");
         return true;
     }
 }
 
-function birthdateCheck(result) {
-    let value = result.target.value;
-	let regex = /^\S+@\S+\.\S+$/;
-    let input = document.getElementById("birthdateInput");
-    if (regex.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer une date valide");
-        return false;
-    } else {
-        input.setAttribute("data-error-visible", "false");
-        input.setAttribute("data-error", "");
-        return true;
-    }
-}
+// function birthdateCheck(result) {
+//     let value = result.target.value;
+// 	let regex = /^\S+@\S+\.\S+$/;
+//     let input = document.getElementById("birthdateInput");
+//     if (regex.test(value) == false) {
+//         input.setAttribute("data-error-visible", "true");
+//         // data-error attribute creation with text value, works with formData::after in css
+//         input.setAttribute("data-error", "Veuillez entrer une date valide");
+//         return false;
+//     } else {
+//         input.setAttribute("data-error-visible", "false");
+//         input.setAttribute("data-error", "");
+//         return true;
+//     }
+// }
 
 
 function quantityCheck(result) {
@@ -134,18 +132,32 @@ function quantityCheck(result) {
         return false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        input.setAttribute("data-error", "");
         return true;
     }
 }
 
+conditionsCheckbox.addEventListener("change", conditionsChecking);
 
-
+function conditionsChecking() {
+    // let input = document.getElementById("conditionsInput");
+    if (conditionsCheckbox.checked == true) {
+        alert("yes");
+        // input.setAttribute("data-error-visible", "true");
+        // // data-error attribute creation with text value, works with formData::after in css
+        // input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
+        // // return false;
+    } else {
+        // input.setAttribute("data-error-visible", "false");
+        // // return true;
+        alert("no");
+    }
+}
 
 
 function validate(event) {
     // to prevent form submit
     event.preventDefault();
+    firstCheck();
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
     if (firstNameValid == true && conditionsCheckbox.checked == true) {
         // launch form confirmation
@@ -154,6 +166,13 @@ function validate(event) {
         formular.reset();
     } else {
         alert("Saisie invalide")
+        // if (firstNameValid != true) {
+        //     let input = document.getElementById("firstNameInput");
+        //     input.setAttribute("data-error-visible", "true");
+        //     // data-error attribute creation with text value, works with formData::after in css
+        //     input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
+        //     return firstNameValid == false;
+        // }
+        
     }
 }
-
