@@ -74,8 +74,8 @@ function firstCheck() {
     }
 }
 
-function lastCheck(result) {
-    let value = result.target.value;
+function lastCheck() {
+    let value = lastName.value;
     let letters = /^[A-Za-z]+$/;
     let input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
@@ -89,8 +89,8 @@ function lastCheck(result) {
     }
 }
 
-function emailCheck(result) {
-    let value = result.target.value;
+function emailCheck() {
+    let value = email.value;
 	let regex = /^\S+@\S+\.\S+$/;
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
@@ -136,20 +136,21 @@ function quantityCheck(result) {
     }
 }
 
-conditionsCheckbox.addEventListener("change", conditionsChecking);
+conditionsCheckbox.addEventListener("click", conditionsChecking);
 
 function conditionsChecking() {
-    // let input = document.getElementById("conditionsInput");
-    if (conditionsCheckbox.checked == true) {
-        alert("yes");
-        // input.setAttribute("data-error-visible", "true");
-        // // data-error attribute creation with text value, works with formData::after in css
-        // input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
-        // // return false;
-    } else {
-        // input.setAttribute("data-error-visible", "false");
-        // // return true;
+    let input = document.getElementById("conditionsInput");
+    if (conditionsCheckbox.checked != true) {
         alert("no");
+        input.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
+        // return false;
+    } else {
+        alert("yes");
+        input.setAttribute("data-error-visible", "false");
+        // // return true;
+        
     }
 }
 
@@ -158,6 +159,9 @@ function validate(event) {
     // to prevent form submit
     event.preventDefault();
     firstCheck();
+    lastCheck();
+    emailCheck();
+    conditionsChecking()
     // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
     if (firstNameValid == true && conditionsCheckbox.checked == true) {
         // launch form confirmation
