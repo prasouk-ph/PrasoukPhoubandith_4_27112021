@@ -55,12 +55,12 @@ lastName.addEventListener("change", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 participationQuantity.addEventListener("change", quantityCheck);
+
 conditionsCheckbox.addEventListener("change", conditionsChecking);
-// location.addEventListener("change", lastCheck);
+
 
 
 // input conditions
-
 function firstCheck() {
     let value = firstName.value;
     let letters = /^[A-Za-z]+$/;
@@ -107,6 +107,17 @@ function emailCheck() {
 }
 
 function birthdateCheck() {
+    let value = birthdate.value;
+    let input = document.getElementById("birthdateInput");
+    if (value == "") {
+        input.setAttribute("data-error-visible", "true");
+        // data-error attribute creation with text value, works with formData::after in css
+        input.setAttribute("data-error", "Veuillez entrer une date valide");
+        return false;
+    } else {
+        input.setAttribute("data-error-visible", "false");
+        return true;
+    }
 }
 
 
@@ -125,21 +136,28 @@ function quantityCheck() {
     }
 }
 
-function locationValidation() {
-    let input = document.getElementById("locationsInput");
-	for (let radio of locationInput) {
+
+locationInput.addEventListener("change", locationChecking);
+const loc = document.querySelectorAll("input[type=radio]");
+
+
+
+function locationChecking() {
+    let input = document.getElementById("locationInput");
+    let radio = document.getElementById("location1");
+	// for (let radio of locationInput) {
 		if (radio.checked == false) {
-            alert("false")
+            // alert("false")
             input.setAttribute("data-error-visible", "true");
             // data-error attribute creation with text value, works with formData::after in css
-            input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
+            input.setAttribute("data-error", "Veuillez accepter sélectionner une ville");
             return false;
 	    } else {
-            alert("true")
+            // alert("true")
             input.setAttribute("data-error-visible", "false");
             return true;
         }
-    }
+    // }
 }
 
 
@@ -167,7 +185,7 @@ function validate(event) {
     emailCheck();
     quantityCheck();
     birthdateCheck();
-    locationValidation();
+    locationChecking();
     conditionsChecking();
     if (firstCheck() == true
     && lastCheck() == true
