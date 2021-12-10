@@ -22,6 +22,7 @@ let lastName = document.querySelector("#last");
 let email = document.querySelector("#email");
 let birthdate = document.querySelector("#birthdate");
 let participationQuantity = document.querySelector("#quantity");
+let locationInput = document.querySelector("#locationInput");
 let conditionsCheckbox = document.querySelector("#checkbox1");
 
 
@@ -48,16 +49,17 @@ function closeModal() {
   formConfirmation.style.display = "none";
 }
 
-// form fulfillement conditions
-let firstNameValid;
+// event listening
 firstName.addEventListener("change", firstCheck);
 lastName.addEventListener("change", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 participationQuantity.addEventListener("change", quantityCheck);
+conditionsCheckbox.addEventListener("change", conditionsChecking);
 // location.addEventListener("change", lastCheck);
 
 
+// input conditions
 
 function firstCheck() {
     let value = firstName.value;
@@ -67,10 +69,10 @@ function firstCheck() {
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
         input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
-        firstNameValid = false;
+        return false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        firstNameValid = true;
+        return true;
     }
 }
 
@@ -82,10 +84,10 @@ function lastCheck() {
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
         input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
-        lastNameValid = false;
+        return false;
     } else {
         input.setAttribute("data-error-visible", "false");
-        lastNameValid = true;
+        return true;
     }
 }
 
@@ -104,25 +106,12 @@ function emailCheck() {
     }
 }
 
-// function birthdateCheck(result) {
-//     let value = result.target.value;
-// 	let regex = /^\S+@\S+\.\S+$/;
-//     let input = document.getElementById("birthdateInput");
-//     if (regex.test(value) == false) {
-//         input.setAttribute("data-error-visible", "true");
-//         // data-error attribute creation with text value, works with formData::after in css
-//         input.setAttribute("data-error", "Veuillez entrer une date valide");
-//         return false;
-//     } else {
-//         input.setAttribute("data-error-visible", "false");
-//         input.setAttribute("data-error", "");
-//         return true;
-//     }
-// }
+function birthdateCheck() {
+}
 
 
-function quantityCheck(result) {
-    let value = result.target.value;
+function quantityCheck() {
+    let value = participationQuantity.value;
     let regex = /^[0-9]+$/;
     let input = document.getElementById("quantityInput");
     if (regex.test(value) == false) {
@@ -136,20 +125,35 @@ function quantityCheck(result) {
     }
 }
 
-conditionsCheckbox.addEventListener("click", conditionsChecking);
+function locationValidation() {
+    let input = document.getElementById("locationsInput");
+	for (let radio of locationInput) {
+		if (radio.checked == false) {
+            alert("false")
+            input.setAttribute("data-error-visible", "true");
+            // data-error attribute creation with text value, works with formData::after in css
+            input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
+            return false;
+	    } else {
+            alert("true")
+            input.setAttribute("data-error-visible", "false");
+            return true;
+        }
+    }
+}
+
+
 
 function conditionsChecking() {
     let input = document.getElementById("conditionsInput");
     if (conditionsCheckbox.checked != true) {
-        alert("no");
         input.setAttribute("data-error-visible", "true");
         // data-error attribute creation with text value, works with formData::after in css
         input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
-        // return false;
+        return false;
     } else {
-        alert("yes");
         input.setAttribute("data-error-visible", "false");
-        // // return true;
+        return true;
         
     }
 }
@@ -161,22 +165,20 @@ function validate(event) {
     firstCheck();
     lastCheck();
     emailCheck();
-    conditionsChecking()
-    // if (firstNameValid == true || lastName.value.length < 2  || email.value == "" || birthdate.value == "" || checkbox.checked == false) {
-    if (firstNameValid == true && conditionsCheckbox.checked == true) {
+    quantityCheck();
+    birthdateCheck();
+    locationValidation();
+    conditionsChecking();
+    if (firstCheck() == true
+    && lastCheck() == true
+    && emailCheck() == true
+    && quantityCheck() == true
+    // && birthdateCheck() == true
+    // && locationValidation() == true
+    && conditionsChecking() == true) {
         // launch form confirmation
         modalBody.style.display = "none";
         formConfirmation.style.display = "flex";
         formular.reset();
-    } else {
-        alert("Saisie invalide")
-        // if (firstNameValid != true) {
-        //     let input = document.getElementById("firstNameInput");
-        //     input.setAttribute("data-error-visible", "true");
-        //     // data-error attribute creation with text value, works with formData::after in css
-        //     input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
-        //     return firstNameValid == false;
-        // }
-        
     }
 }
