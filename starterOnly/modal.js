@@ -163,9 +163,7 @@ function inputValid(input) {
 }
 
 // submit conditions
-function validate(event) {
-    // to prevent form submit
-    event.preventDefault();
+function inputChecking() {
     firstCheck();
     lastCheck();
     emailCheck();
@@ -173,6 +171,12 @@ function validate(event) {
     birthdateCheck();
     locationChecking();
     conditionsChecking();
+}
+
+function validate(event) {
+    // to prevent form submit
+    event.preventDefault();
+    inputChecking();
     if (firstCheck() == true
     && lastCheck() == true
     && emailCheck() == true
