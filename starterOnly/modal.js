@@ -64,8 +64,10 @@ function firstCheck() {
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
+        return false;
     } else {
-        inputValid(input)
+        inputValid(input);
+        return true;
     }
 }
 
@@ -75,8 +77,10 @@ function lastCheck() {
     let input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
+        return false;
     } else {
-        inputValid(input)
+        inputValid(input);
+        return true;
     }
 }
 
@@ -86,8 +90,10 @@ function emailCheck() {
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer un mail valide");
+        return false;
     } else {
-        inputValid(input)
+        inputValid(input);
+        return true;
     }
 }
 
@@ -98,8 +104,10 @@ function birthdateCheck() {
     // if (value == "") {
     if (regex.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer une date valide");
+        return false;
     } else {
-        inputValid(input)
+        inputValid(input);
+        return true;
     }
 }
 
@@ -109,47 +117,49 @@ function quantityCheck() {
     let input = document.getElementById("quantityInput");
     if (regex.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer une nombre");
+        return false;
     } else {
-        inputValid(input)
+        inputValid(input);
+        return true;
     }
 }
 
 function locationChecking() {
     let input = document.getElementById("locationInput");
 	for (let radio of locationsRadio) {
-		if (radio.checked == true) {
-            input.setAttribute("data-error-visible", "false");
-            // to remove the space create by the error
-            input.removeAttribute("data-error");
+		if (radio.checked) {
+            inputValid(input);
+            // without it, error can't disappear
             return true;
         }
     }
     // doesn't works with else, should be outside of the loop 
-    inputIsNotvalid(input, "Veuillez accepter sélectionner une ville");
+    inputIsNotvalid(input, "Veuillez sélectionner une ville");
+    return false;
 }
 
 function conditionsChecking() {
     let input = document.getElementById("conditionsInput");
     if (conditionsCheckbox.checked != true) {
         inputIsNotvalid(input, "Veuillez accepter les conditions d'utilisation");
+        return false;
     } else {
         inputValid(input);
+        return true;
     }
 }
 
-
-function inputIsNotvalid(input, message) {
+// error display
+function inputIsNotvalid(input, error) {
     input.setAttribute("data-error-visible", "true");
     // data-error attribute creation with text value, works with formData::after in css
-    input.setAttribute("data-error", message);
-    return false;
+    input.setAttribute("data-error", error);
 }
 
 function inputValid(input) {
     input.setAttribute("data-error-visible", "false");
     // to remove the space create by the error
     input.removeAttribute("data-error");
-    return true;
 }
 
 // submit conditions
