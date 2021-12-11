@@ -141,23 +141,21 @@ function quantityCheck() {
 locationInput.addEventListener("change", locationChecking);
 const locationsRadio = document.querySelectorAll("input[type=radio]");
 
+
 function locationChecking() {
     let input = document.getElementById("locationInput");
-	// for (let radio of locationsRadio) {
-    for (let i = 0; i < 7; i++) {
-		// if (radio.checked == false) {
-        if (locationsRadio[i].checked == false) {
-            input.setAttribute("data-error-visible", "true");
-            // data-error attribute creation with text value, works with formData::after in css
-            input.setAttribute("data-error", "Veuillez accepter sélectionner une ville");
-            // return false;
-	    } else {
+	for (let radio of locationsRadio) {
+		if (radio.checked == true) {
             input.setAttribute("data-error-visible", "false");
-            // return true;
+            input.removeAttribute("data-error");
+            return true;
         }
     }
+    // doesn't works with else, should be outside of the loop 
+    input.setAttribute("data-error-visible", "true");
+    input.setAttribute("data-error", "Veuillez accepter sélectionner une ville");
+    return false;
 }
-
 
 
 function conditionsChecking() {
@@ -169,6 +167,7 @@ function conditionsChecking() {
         return false;
     } else {
         input.setAttribute("data-error-visible", "false");
+        input.removeAttribute("data-error");
         return true;
     }
 }
@@ -195,5 +194,10 @@ function validate(event) {
         modalBody.style.display = "none";
         formConfirmation.style.display = "flex";
         formular.reset();
+    }
+    if (locationChecking() == false) {
+        alert("not checked");
+    } else {
+        alert("checked");
     }
 }
