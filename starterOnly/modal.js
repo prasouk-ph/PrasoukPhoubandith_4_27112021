@@ -17,16 +17,13 @@ const modalCloseBtn = document.querySelectorAll(".close");
 const modalBtnSubmit = document.querySelector(".btn-submit");
 const formBtnConfirmation = document.querySelector(".btn-confirmation");
 const formConfirmation = document.querySelector(".form-confirmation");
-let firstName = document.querySelector("#first");
-let lastName = document.querySelector("#last");
-let email = document.querySelector("#email");
-let birthdate = document.querySelector("#birthdate");
-let participationQuantity = document.querySelector("#quantity");
-
-let conditionsCheckbox = document.querySelector("#checkbox1");
-
-
-let firstNameInput = document.querySelector(".firstNameInput");
+const firstName = document.querySelector("#first");
+const lastName = document.querySelector("#last");
+const email = document.querySelector("#email");
+const birthdate = document.querySelector("#birthdate");
+const participationQuantity = document.querySelector("#quantity");
+const locationsRadio = document.querySelectorAll("input[type=radio]");
+const conditionsCheckbox = document.querySelector("#checkbox1");
 
 
 // launch modal event
@@ -55,10 +52,8 @@ lastName.addEventListener("change", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 participationQuantity.addEventListener("change", quantityCheck);
-
+locationsRadio.addEventListener("change", locationChecking);
 conditionsCheckbox.addEventListener("change", conditionsChecking);
-
-
 
 // input conditions
 function firstCheck() {
@@ -137,16 +132,12 @@ function quantityCheck() {
     }
 }
 
-
-locationInput.addEventListener("change", locationChecking);
-const locationsRadio = document.querySelectorAll("input[type=radio]");
-
-
 function locationChecking() {
     let input = document.getElementById("locationInput");
 	for (let radio of locationsRadio) {
 		if (radio.checked == true) {
             input.setAttribute("data-error-visible", "false");
+            // to remove the space create by the error
             input.removeAttribute("data-error");
             return true;
         }
@@ -157,7 +148,6 @@ function locationChecking() {
     return false;
 }
 
-
 function conditionsChecking() {
     let input = document.getElementById("conditionsInput");
     if (conditionsCheckbox.checked != true) {
@@ -167,6 +157,7 @@ function conditionsChecking() {
         return false;
     } else {
         input.setAttribute("data-error-visible", "false");
+        // to remove the space create by the error
         input.removeAttribute("data-error");
         return true;
     }
@@ -187,17 +178,12 @@ function validate(event) {
     && lastCheck() == true
     && emailCheck() == true
     && quantityCheck() == true
-    // && birthdateCheck() == true
-    // && locationValidation() == true
+    && birthdateCheck() == true
+    && locationChecking() == true
     && conditionsChecking() == true) {
         // launch form confirmation
         modalBody.style.display = "none";
         formConfirmation.style.display = "flex";
         formular.reset();
-    }
-    if (locationChecking() == false) {
-        alert("not checked");
-    } else {
-        alert("checked");
     }
 }
