@@ -99,6 +99,7 @@ function emailCheck() {
 
 function birthdateCheck() {
     let value = birthdate.value;
+    // let regex = /(\d{4})-(\d{2})-(\d{2})/;
     let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
     let input = document.getElementById("birthdateInput");
     // if (value == "") {
