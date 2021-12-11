@@ -63,13 +63,9 @@ function firstCheck() {
     let letters = /^[A-Za-z]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
-        return false;
+        inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        return true;
+        inputValid(input)
     }
 }
 
@@ -78,13 +74,9 @@ function lastCheck() {
     let letters = /^[A-Za-z]+$/;
     let input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus");
-        return false;
+        inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        return true;
+        inputValid(input)
     }
 }
 
@@ -93,13 +85,9 @@ function emailCheck() {
 	let regex = /^\S+@\S+\.\S+$/;
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer un mail valide");
-        return false;
+        inputIsNotvalid(input, "Veuillez entrer un mail valide");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        return true;
+        inputValid(input)
     }
 }
 
@@ -109,13 +97,9 @@ function birthdateCheck() {
     let input = document.getElementById("birthdateInput");
     // if (value == "") {
     if (regex.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer une date valide");
-        return false;
+        inputIsNotvalid(input, "Veuillez entrer une date valide");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        return true;
+        inputValid(input)
     }
 }
 
@@ -124,13 +108,9 @@ function quantityCheck() {
     let regex = /^[0-9]+$/;
     let input = document.getElementById("quantityInput");
     if (regex.test(value) == false) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez entrer une nombre");
-        return false;
+        inputIsNotvalid(input, "Veuillez entrer une nombre");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        return true;
+        inputValid(input)
     }
 }
 
@@ -145,27 +125,34 @@ function locationChecking() {
         }
     }
     // doesn't works with else, should be outside of the loop 
-    input.setAttribute("data-error-visible", "true");
-    input.setAttribute("data-error", "Veuillez accepter sélectionner une ville");
-    return false;
+    inputIsNotvalid(input, "Veuillez accepter sélectionner une ville");
 }
 
 function conditionsChecking() {
     let input = document.getElementById("conditionsInput");
     if (conditionsCheckbox.checked != true) {
-        input.setAttribute("data-error-visible", "true");
-        // data-error attribute creation with text value, works with formData::after in css
-        input.setAttribute("data-error", "Veuillez accepter les conditions d'utilisation");
-        return false;
+        inputIsNotvalid(input, "Veuillez accepter les conditions d'utilisation");
     } else {
-        input.setAttribute("data-error-visible", "false");
-        // to remove the space create by the error
-        input.removeAttribute("data-error");
-        return true;
+        inputValid(input);
     }
 }
 
 
+function inputIsNotvalid(input, message) {
+    input.setAttribute("data-error-visible", "true");
+    // data-error attribute creation with text value, works with formData::after in css
+    input.setAttribute("data-error", message);
+    return false;
+}
+
+function inputValid(input) {
+    input.setAttribute("data-error-visible", "false");
+    // to remove the space create by the error
+    input.removeAttribute("data-error");
+    return true;
+}
+
+// submit conditions
 function validate(event) {
     // to prevent form submit
     event.preventDefault();
