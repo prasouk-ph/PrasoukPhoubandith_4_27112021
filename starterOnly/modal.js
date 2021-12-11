@@ -22,6 +22,7 @@ const lastName = document.querySelector("#last");
 const email = document.querySelector("#email");
 const birthdate = document.querySelector("#birthdate");
 const participationQuantity = document.querySelector("#quantity");
+const locationInput = document.getElementById("locationInput");
 const locationsRadio = document.querySelectorAll("input[type=radio]");
 const conditionsCheckbox = document.querySelector("#checkbox1");
 
@@ -52,8 +53,9 @@ lastName.addEventListener("change", lastCheck);
 email.addEventListener("change", emailCheck);
 birthdate.addEventListener("change", birthdateCheck);
 participationQuantity.addEventListener("change", quantityCheck);
-locationsRadio.addEventListener("change", locationChecking);
+locationInput.addEventListener("change", locationChecking);
 conditionsCheckbox.addEventListener("change", conditionsChecking);
+
 
 // input conditions
 function firstCheck() {
