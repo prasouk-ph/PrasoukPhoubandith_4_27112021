@@ -60,7 +60,7 @@ conditionsCheckbox.addEventListener("change", conditionsChecking);
 // input conditions
 function firstCheck() {
     let value = firstName.value;
-    // regex interpretation: start with any letter after the first letter can contain 0 or 1 "-" , should finish with a letter
+    // regex interpretation: start with any letter after the first letter can contains 0 or 1 "-" , should finish with a letter
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
@@ -115,10 +115,11 @@ function birthdateCheck() {
 
 function quantityCheck() {
     let value = participationQuantity.value;
-    let regex = /^[0-9]+$/;
+    // regex interpretation: should contains at least one number between 0 and 9
+    let regex = /[0-9]+/;
     let input = document.getElementById("quantityInput");
     if (regex.test(value) == false) {
-        inputIsNotvalid(input, "Veuillez entrer une nombre");
+        inputIsNotvalid(input, "Veuillez entrer un nombre");
         return false;
     } else {
         inputValid(input);
