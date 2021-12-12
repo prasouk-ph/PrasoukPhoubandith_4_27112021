@@ -60,7 +60,7 @@ conditionsCheckbox.addEventListener("change", conditionsChecking);
 // input conditions
 function firstCheck() {
     let value = firstName.value;
-    // regex interpretation: start with any letter and can contain 0 or 1 "-" after the first letter, finish with a letter
+    // regex interpretation: start with any letter after the first letter can contain 0 or 1 "-" , should finish with a letter
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
