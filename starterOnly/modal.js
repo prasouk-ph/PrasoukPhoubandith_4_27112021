@@ -60,8 +60,8 @@ conditionsCheckbox.addEventListener("change", conditionsChecking);
 // input conditions
 function firstCheck() {
     let value = firstName.value;
-    // regex interpretation: start with any letter and contain "-" after the first letter
-    let letters = /^[A-Za-zÀ-ÿ]+[A-Za-zÀ-ÿ-]+$/;
+    // regex interpretation: start with any letter and can contain 0 or 1 "-" after the first letter, finish with a letter
+    let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
@@ -74,7 +74,7 @@ function firstCheck() {
 
 function lastCheck() {
     let value = lastName.value;
-    let letters = /^[A-Za-zÀ-ÿ]+[A-Za-zÀ-ÿ-]+$/;
+    let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("lastNameInput");
     if (value.length < 2 || value === null || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
