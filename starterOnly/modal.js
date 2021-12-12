@@ -87,10 +87,11 @@ function lastCheck() {
 
 function emailCheck() {
     let value = email.value;
+    // regex interpretation: \S = Matches any non-white space character
 	let regex = /^\S+@\S+\.\S+$/;
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
-        inputIsNotvalid(input, "Veuillez entrer un mail valide");
+        inputIsNotvalid(input, "Veuillez entrer un email valide");
         return false;
     } else {
         inputValid(input);
