@@ -99,21 +99,6 @@ function emailCheck() {
     }
 }
 
-// function birthdateCheck() {
-//     let value = birthdate.value;
-//     // let regex = /(\d{4})-(\d{2})-(\d{2})/;
-//     let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
-//     let input = document.getElementById("birthdateInput");
-//     // if (value == "") {
-//     if (regex.test(value) == false) {
-//         inputIsNotvalid(input, "Veuillez entrer une date valide");
-//         return false;
-//     } else {
-//         inputValid(input);
-//         return true;
-//     }
-// }
-
 function birthdateCheck() {
     let value = birthdate.value;
     let dateSelected = Date.parse(birthdate.value); // convert date string to numerical value
@@ -150,7 +135,6 @@ function locationChecking() {
 	for (let radio of locationsRadio) {
 		if (radio.checked) {
             inputValid(input);
-            // without it, error can't disappear
             return true;
         }
     }
