@@ -63,7 +63,7 @@ function firstCheck() {
     // regex interpretation: start with any letter after the first letter can contains 0 or 1 "-" , should finish with a letter
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("firstNameInput");
-    if (value.length < 2 || value === null || letters.test(value) == false) {
+    if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
         return false;
     } else {
@@ -76,7 +76,7 @@ function lastCheck() {
     let value = lastName.value;
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("lastNameInput");
-    if (value.length < 2 || value === null || letters.test(value) == false) {
+    if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
         return false;
     } else {
@@ -99,20 +99,43 @@ function emailCheck() {
     }
 }
 
+
 function birthdateCheck() {
-    let value = birthdate.value;
+    let dateSelected = birthdate.value;
     // let regex = /(\d{4})-(\d{2})-(\d{2})/;
-    let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
     let input = document.getElementById("birthdateInput");
     // if (value == "") {
-    if (regex.test(value) == false) {
-        inputIsNotvalid(input, "Veuillez entrer une date valide");
-        return false;
-    } else {
-        inputValid(input);
+        alert(dateSelected);
+        let today = new Date();
+        let todayString = today.toLocaleString();
+        alert(todayString);
+        let calcul = todayString - dateSelected;
+        // alert(calcul);
         return true;
-    }
+    // if (if (calcul < 2010)) {
+    //     inputIsNotvalid(input, "Veuillez entrer une date valide");
+    //     return false;
+    // } else {
+    //     inputValid(input);
+    //     return true;
+    // }
 }
+
+// function birthdateCheck() {
+//     let value = birthdate.value;
+//     // let regex = /(\d{4})-(\d{2})-(\d{2})/;
+//     let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
+//     let input = document.getElementById("birthdateInput");
+//     // if (value == "") {
+//         alert(value);
+//     if (regex.test(value) == false) {
+//         inputIsNotvalid(input, "Veuillez entrer une date valide");
+//         return false;
+//     } else {
+//         inputValid(input);
+//         return true;
+//     }
+// }
 
 function quantityCheck() {
     let value = participationQuantity.value;
@@ -180,6 +203,7 @@ function inputChecking() {
 function validate(event) {
     // to prevent form submit
     event.preventDefault();
+    //
     inputChecking();
     if (firstCheck() == true
     && lastCheck() == true
