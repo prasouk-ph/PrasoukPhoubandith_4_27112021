@@ -117,17 +117,12 @@ function emailCheck() {
 function birthdateCheck() {
     let value = birthdate.value;
     let dateSelected = Date.parse(birthdate.value); // convert date string to numerical value
-    // let regex = /(\d{2})-(\d{2})-(\d{4})/;
-    // let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
     let input = document.getElementById("birthdateInput");
         let today = new Date().getTime(); // convert date string to numerical value
-        // let today = new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime();
         let timeDifference = today - dateSelected;
         let minTime = 409968000000; // 13 years
         let maxTime = 3153600000000; // 100 years
         if (timeDifference < 0 || timeDifference < minTime || timeDifference > maxTime || value == "")  {
-        // if (timeDifference < 0 || timeDifference < minTime || regex.test(value) == false)  {
-        // if (regex.test(value) == false)  {
             inputIsNotvalid(input, "Veuillez entrer une date valide, vous devez avoir au moins 13 ans");
             return false;
         } else {
