@@ -99,37 +99,12 @@ function emailCheck() {
     }
 }
 
-
-function birthdateCheck() {
-    // convert date string to numerical value
-    let dateSelected = Date.parse(birthdate.value);
-    // let regex = /(\d{4})-(\d{2})-(\d{2})/;
-    let input = document.getElementById("birthdateInput");
-    // if (value == "") {
-        alert(dateSelected);
-        // let today = new Date().toISOString().split("T")[0];
-        let today = new Date().getTime();
-        alert(today);
-        // let calcul = today.getTime();
-        let calcul = today - dateSelected;
-        alert(calcul);
-        return true;
-    // if (if (calcul < 2010)) {
-    //     inputIsNotvalid(input, "Veuillez entrer une date valide");
-    //     return false;
-    // } else {
-    //     inputValid(input);
-    //     return true;
-    // }
-}
-
 // function birthdateCheck() {
 //     let value = birthdate.value;
 //     // let regex = /(\d{4})-(\d{2})-(\d{2})/;
 //     let regex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
 //     let input = document.getElementById("birthdateInput");
 //     // if (value == "") {
-//         alert(value);
 //     if (regex.test(value) == false) {
 //         inputIsNotvalid(input, "Veuillez entrer une date valide");
 //         return false;
@@ -138,6 +113,26 @@ function birthdateCheck() {
 //         return true;
 //     }
 // }
+
+function birthdateCheck() {
+    let value = birthdate.value;
+    let dateSelected = Date.parse(birthdate.value); // convert date string to numerical value
+    // let regex = /(\d{2})-(\d{2})-(\d{4})/;
+    let input = document.getElementById("birthdateInput");
+        let today = new Date().getTime(); // convert date string to numerical value
+        // let today = new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime();
+        let timeDifference = today - dateSelected;
+        let minTime = 409968000000; // 13 years
+        // if (timeDifference < 0 || timeDifference < minTime)  {
+        // if (timeDifference < 0 || timeDifference < minTime || regex.test(value) == false)  {
+        if (value == "") {
+            inputIsNotvalid(input, "Veuillez entrer une date valide, vous devez avoir au moins 13 ans");
+            return false;
+        } else {
+            inputValid(input);
+            return true;
+        }
+}
 
 function quantityCheck() {
     let value = participationQuantity.value;
@@ -205,7 +200,6 @@ function inputChecking() {
 function validate(event) {
     // to prevent form submit
     event.preventDefault();
-    //
     inputChecking();
     if (firstCheck() == true
     && lastCheck() == true
