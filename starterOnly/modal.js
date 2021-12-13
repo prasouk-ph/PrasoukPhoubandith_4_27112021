@@ -101,16 +101,18 @@ function emailCheck() {
 
 
 function birthdateCheck() {
-    let dateSelected = birthdate.value;
+    // convert date string to numerical value
+    let dateSelected = Date.parse(birthdate.value);
     // let regex = /(\d{4})-(\d{2})-(\d{2})/;
     let input = document.getElementById("birthdateInput");
     // if (value == "") {
         alert(dateSelected);
-        let today = new Date();
-        let todayString = today.toLocaleString();
-        alert(todayString);
-        let calcul = todayString - dateSelected;
-        // alert(calcul);
+        // let today = new Date().toISOString().split("T")[0];
+        let today = new Date().getTime();
+        alert(today);
+        // let calcul = today.getTime();
+        let calcul = today - dateSelected;
+        alert(calcul);
         return true;
     // if (if (calcul < 2010)) {
     //     inputIsNotvalid(input, "Veuillez entrer une date valide");
