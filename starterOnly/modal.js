@@ -107,7 +107,7 @@ function birthdateCheck() {
         let timeDifference = today - dateSelected;
         let minTime = 409968000000+259200000; // 13 years + 3 days for leap year
         let maxTime = 3153600000000+2160000000; // 100 years + 25 days for leap year
-        if (timeDifference < 0 || timeDifference < minTime || timeDifference > maxTime || value == "")  {
+        if (timeDifference < minTime || timeDifference > maxTime || value == "")  {
             inputIsNotvalid(input, "Veuillez entrer une date valide, vous devez avoir au moins 13 ans");
             return false;
         } else {
