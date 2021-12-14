@@ -105,8 +105,8 @@ function birthdateCheck() {
     let input = document.getElementById("birthdateInput");
         let today = new Date().getTime(); // convert date string to numerical value
         let timeDifference = today - dateSelected;
-        let minTime = 409968000000; // 13 years
-        let maxTime = 3153600000000; // 100 years
+        let minTime = 409968000000+259200000; // 13 years + 3 days for leap year
+        let maxTime = 3153600000000+2160000000; // 100 years + 25 days for leap year
         if (timeDifference < 0 || timeDifference < minTime || timeDifference > maxTime || value == "")  {
             inputIsNotvalid(input, "Veuillez entrer une date valide, vous devez avoir au moins 13 ans");
             return false;
