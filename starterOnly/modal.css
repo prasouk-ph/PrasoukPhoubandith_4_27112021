@@ -37,6 +37,12 @@ img {
 .header-logo {
     float: left;
 }
+
+.header-logo img {
+    /* to keep nav align */
+    padding-right: 0;
+}
+
 .main-navbar {
     float: right;
 }
@@ -97,7 +103,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 } 
 
