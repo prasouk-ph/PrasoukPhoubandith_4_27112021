@@ -7,6 +7,7 @@ function editNav() {
   }
 }
 
+
 // DOM Elements
 const formular = document.querySelector("#formular");
 const modalbg = document.querySelector(".bground");
@@ -30,22 +31,25 @@ const conditionsCheckbox = document.querySelector("#checkbox1");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-//   to send another form
-  modalBody.style.display = "block";
+  modalBody.style.display = "block"; //   to send another form
 }
+
 
 // close modal event
 modalCloseBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 formBtnConfirmation.addEventListener("click", closeModal);
+
 
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
   formConfirmation.style.display = "none";
 }
+
 
 // event listening
 firstName.addEventListener("change", firstCheck);
@@ -60,7 +64,7 @@ conditionsCheckbox.addEventListener("change", conditionsChecking);
 // input conditions
 function firstCheck() {
     let value = firstName.value;
-    // regex interpretation: start with any letter after the first letter can contains 0 or 1 "-" , should finish with a letter
+    // regex interpretation: start with any letter, after the first letter can contains 0 or 1 "-" , should finish with a letter
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.getElementById("firstNameInput");
     if (value.length < 2 || letters.test(value) == false) {
@@ -87,7 +91,7 @@ function lastCheck() {
 
 function emailCheck() {
     let value = email.value;
-    // regex interpretation: \S = Matches any non-white space character
+    // regex: \S = Matches any non-white space character
 	let regex = /^\S+@\S+\.\S+$/;
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
@@ -101,12 +105,12 @@ function emailCheck() {
 
 function birthdateCheck() {
     let value = birthdate.value;
-    let dateSelected = Date.parse(birthdate.value); // convert date string to numerical value
+    let dateSelected = Date.parse(birthdate.value); // convert date string to numerical value with date.parse
     let input = document.getElementById("birthdateInput");
-        let today = new Date().getTime(); // convert date string to numerical value
-        let timeDifference = today - dateSelected;
+        let today = new Date().getTime(); // convert date string to numerical value with getTime
         let minTime = 409968000000+259200000; // 13 years + 3 days for leap year
         let maxTime = 3153600000000+2160000000+86400000; // 100 years + 25 days for leap year + 1 day because of today time
+        let timeDifference = today - dateSelected;
         if (timeDifference < minTime || timeDifference > maxTime || value == "")  {
             inputIsNotvalid(input, "Veuillez entrer une date valide");
             return false;
@@ -154,6 +158,7 @@ function conditionsChecking() {
     }
 }
 
+
 // error display
 function inputIsNotvalid(input, error) {
     input.setAttribute("data-error-visible", "true");
@@ -166,6 +171,7 @@ function inputValid(input) {
     // to remove the space create by the error
     input.removeAttribute("data-error");
 }
+
 
 // submit conditions
 function inputChecking() {
