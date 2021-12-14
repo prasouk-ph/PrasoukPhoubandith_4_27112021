@@ -91,8 +91,7 @@ function lastCheck() {
 
 function emailCheck() {
     let value = email.value;
-    // regex: \S = Matches any non-white space character
-	let regex = /^\S+@\S+\.\S+$/;
+	let regex = /^[A-Za-z0-9_\.-]+@[A-Za-z]+\.[A-Za-z]+$/;
     let input = document.getElementById("emailInput");
     if (regex.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer un email valide");
